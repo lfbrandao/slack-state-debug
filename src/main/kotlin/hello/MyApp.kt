@@ -14,11 +14,11 @@ import com.slack.api.model.block.element.ButtonElement
 import com.slack.api.model.kotlin_extension.block.withBlocks
 import com.slack.api.model.kotlin_extension.view.blocks
 import com.slack.api.model.view.Views.*
+import com.slack.api.app_backend.interactive_components.response.OptionGroup
 import java.net.URLDecoder
 import com.slack.api.Slack
 import com.slack.api.model.block.Blocks.*
 import com.slack.api.methods.kotlin_extension.request.chat.blocks
-
 
 // export SLACK_SIGNING_SECRET=
 // export SLACK_BOT_TOKEN=
@@ -114,20 +114,29 @@ fun main() {
   }
 
 
-  val allOptions = listOf(
+  val optionGroupOneOptions = listOf(
       Option(plainText("Schedule"), "schedule"),
       Option(plainText("Budget"), "budget"),
       Option(plainText("Assignment"), "assignment")
   )
+  val optionGroupTwoOptions = listOf(
+      Option(plainText("Another"), "another"),
+      Option(plainText("Option"), "option"),
+      Option(plainText("List"), "list")
+  )
   app.blockSuggestion("select") { req, ctx ->
-    //    ctx.logger.info("view.state.values: {}", req.payload.view.state.values)
-    val keyword = req.payload.value
-    if (keyword == null || keyword.isEmpty()) {
-      ctx.ack { it.options(allOptions) }
-    } else {
-      val options = allOptions.filter { (it.text as PlainTextObject).text.contains(keyword) }
-      ctx.ack { it.options(options) }
-    }
+    // val keyword = req.payload.value
+    // if (keyword == null || keyword.isEmpty()) {
+    //   ctx.ack { it.options(optionGroupTwoOptions) }
+    // } else {
+    //   val options = optionGroupTwoOptions.filter { (it.text as PlainTextObject).text.contains(keyword) }
+    //   ctx.ack { it.options(options) }
+    // }
+    val slackOptionGroups = ArrayList<OptionGroup>()
+    slackOptionGroups.add(OptionGroup("Group One", optionGroupOneOptions))
+    slackOptionGroups.add(OptionGroup("Group Two", optionGroupTwoOptions))
+    
+    ctx.ack { it.optionGroups(slackOptionGroups) }
   }
 
   app.blockAction("save") { req, ctx ->

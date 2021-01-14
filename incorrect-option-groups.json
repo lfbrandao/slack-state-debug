@@ -1,0 +1,53 @@
+{
+	"option_groups": [{
+			"label": "Group One",
+			"options": [{
+					"text": {
+						"type": "plain_text",
+						"text": "Schedule"
+					},
+					"value": "schedule"
+				},
+				{
+					"text": {
+						"type": "plain_text",
+						"text": "Budget"
+					},
+					"value": "budget"
+				},
+				{
+					"text": {
+						"type": "plain_text",
+						"text": "Assignment"
+					},
+					"value": "assignment"
+				}
+			]
+		},
+		{
+			"label": "Group Two",
+			"options": [{
+					"text": {
+						"type": "plain_text",
+						"text": "Another"
+					},
+					"value": "another"
+				},
+				{
+					"text": {
+						"type": "plain_text",
+						"text": "Option"
+					},
+					"value": "option"
+				},
+				{
+					"text": {
+						"type": "plain_text",
+						"text": "List"
+					},
+					"value": "list"
+				}
+			]
+		}
+	]
+}
